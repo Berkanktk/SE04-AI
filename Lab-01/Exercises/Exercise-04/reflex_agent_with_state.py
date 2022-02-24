@@ -71,7 +71,7 @@ def Actuators(action):  # Modify Environment
 
 
 def run(n):  # run the agent through n steps
-    print('\tCurrent\t\t\tNew')
+    print('      Current                       New')
     print('location\tstatus\taction\tlocation\tstatus')
     for i in range(1, n):
         (location, status) = Sensors()  # Sense Environment before action
