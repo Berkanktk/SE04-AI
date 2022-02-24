@@ -1,1 +1,1 @@
-# SE04-AI
+# Artificial Intelligence - Exercises
