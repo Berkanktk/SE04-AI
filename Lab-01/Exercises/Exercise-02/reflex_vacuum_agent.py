@@ -33,8 +33,8 @@ def Actuators(action):
 
 
 def run(n):
-    print('      Current                            New')
-    print('location    status    action    location    status')
+    print('      Current                       New')
+    print('location    status  action  location    status')
     for i in range(1, n):
         (location, status) = Sensors()
         print("{:12s}{:8s}".format(location, status), end='')
@@ -45,4 +45,4 @@ def run(n):
 
 
 if __name__ == '__main__':
-    run(5)
+    run(10)

@@ -67,4 +67,4 @@ def run(n):
 
 
 if __name__ == "__main__":
-    run(6)
+    run(10)

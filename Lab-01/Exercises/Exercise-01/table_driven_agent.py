@@ -27,7 +27,7 @@ def TABLE_DRIVEN_AGENT(percept):
 
 
 def run():
-    print('Action\tPercepts')
+    print('Action   Percepts')
     print(TABLE_DRIVEN_AGENT((A, 'Clean')), '\t', percepts)
     print(TABLE_DRIVEN_AGENT((A, 'Dirty')), '\t', percepts)
     print(TABLE_DRIVEN_AGENT((B, 'Clean')), '\t', percepts)
