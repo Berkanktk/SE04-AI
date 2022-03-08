@@ -95,10 +95,10 @@ Successor function, mapping the nodes to its successors
 def successor_fn(state):  # Lookup list of successor states
     return STATE_SPACE[state]  # successor_fn( 'C' ) returns ['F', 'G']
 
-
+# farmer, wolf, goat, cabbage
 INITIAL_STATE = ('W', 'W', 'W', 'W')
 GOAL_STATE = ('E', 'E', 'E', 'E')
-STATE_SPACE = {('A', 'Dirty', 'Dirty'): [('A', 'Clean', 'Dirty'), ('A', 'Dirty', 'Dirty'), ('B', 'Dirty', 'Dirty')],
+STATE_SPACE = {('W', 'W', 'W', 'W'): [('E', 'W', 'W', 'E'), ('E', 'E', 'W', 'W'), ('W', 'W', 'W', 'W')],
                ('A', 'Clean', 'Dirty'): [('A', 'Clean', 'Dirty'), ('A', 'Clean', 'Dirty'), ('B', 'Clean', 'Dirty')],
                ('A', 'Clean', 'Clean'): [('A', 'Clean', 'Clean'), ('A', 'Clean', 'Clean'), ('B', 'Clean', 'Clean')],
                ('A', 'Dirty', 'Clean'): [('A', 'Clean', 'Clean'), ('A', 'Dirty', 'Clean'), ('B', 'Dirty', 'Clean')],
