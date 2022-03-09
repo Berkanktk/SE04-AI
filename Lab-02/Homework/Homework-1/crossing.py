@@ -93,21 +93,40 @@ Successor function, mapping the nodes to its successors
 
 
 def successor_fn(state):  # Lookup list of successor states
-    return STATE_SPACE[state]  # successor_fn( 'C' ) returns ['F', 'G']
+    eats = {
+        ('W', 'W', 'E', 'E'),  # Goat and cabbage is alone in east
+        ('E', 'E', 'W', 'W'),  # Goat and cabbage is alone in west
+        ('W', 'E', 'E', 'W'),  # Wolf and goat is alone in east
+        ('E', 'W', 'W', 'E'),  # Wolf and goat is alone in west
+        ('E', 'W', 'W', 'W'),  # Wolf, goat and cabbage is alone in west
+        ('W', 'E', 'E', 'E')  # Wolf, goat and cabbage is alone in East
+    }
+
+    return [i for i in STATE_SPACE[state] if i not in eats]  # successor_fn( 'C' ) returns ['F', 'G']
+
 
 # farmer, wolf, goat, cabbage
 INITIAL_STATE = ('W', 'W', 'W', 'W')
 GOAL_STATE = ('E', 'E', 'E', 'E')
-STATE_SPACE = {('W', 'W', 'W', 'W'): [('E', 'W', 'W', 'E'), ('E', 'E', 'W', 'W'), ('W', 'W', 'W', 'W')],
-               ('A', 'Clean', 'Dirty'): [('A', 'Clean', 'Dirty'), ('A', 'Clean', 'Dirty'), ('B', 'Clean', 'Dirty')],
-               ('A', 'Clean', 'Clean'): [('A', 'Clean', 'Clean'), ('A', 'Clean', 'Clean'), ('B', 'Clean', 'Clean')],
-               ('A', 'Dirty', 'Clean'): [('A', 'Clean', 'Clean'), ('A', 'Dirty', 'Clean'), ('B', 'Dirty', 'Clean')],
+STATE_SPACE = {
+    ('W', 'W', 'W', 'W'): [('E', 'W', 'W', 'W'), ('E', 'E', 'W', 'W'), ('E', 'W', 'E', 'W'), ('E', 'W', 'W', 'E')],
+    ('E', 'E', 'E', 'E'): [('W', 'E', 'E', 'E'), ('W', 'W', 'E', 'E'), ('W', 'E', 'W', 'E'), ('W', 'E', 'E', 'W')],
+    ('W', 'W', 'W', 'E'): [('E', 'W', 'E', 'E'), ('E', 'E', 'W', 'E'), ('E', 'E', 'W', 'E')],
+    ('E', 'W', 'E', 'E'): [('W', 'W', 'E', 'E'), ('W', 'W', 'W', 'E'), ('W', 'E', 'W', 'W')],
+    ('W', 'W', 'E', 'W'): [('E', 'E', 'E', 'W'), ('E', 'W', 'E', 'E'), ('E', 'E', 'E', 'W')],
+    ('W', 'E', 'W', 'W'): [('E', 'E', 'E', 'W'), ('E', 'E', 'W', 'E'), ('E', 'E', 'W', 'W')],
+    ('E', 'E', 'W', 'E'): [('W', 'W', 'W', 'E'), ('W', 'E', 'W', 'W'), ('W', 'E', 'W', 'E')],
+    ('E', 'E', 'E', 'W'): [('W', 'W', 'E', 'W'), ('W', 'E', 'W', 'W'), ('W', 'E', 'E', 'W')],
+    ('W', 'W', 'E', 'E'): [('E', 'E', 'E', 'E'), ('E', 'W', 'E', 'E')],
+    ('W', 'E', 'E', 'W'): [('E', 'E', 'E', 'E'), ('E', 'E', 'E', 'W')],
+    ('E', 'W', 'E', 'W'): [('W', 'W', 'W', 'W'), ('W', 'W', 'E', 'W')],
+    ('E', 'E', 'W', 'W'): [('W', 'W', 'W', 'W'), ('W', 'E', 'W', 'W')],
+    ('W', 'E', 'W', 'E'): [('E', 'E', 'E', 'E'), ('E', 'E', 'W', 'E')],
+    ('E', 'W', 'W', 'E'): [('W', 'W', 'W', 'E'), ('W', 'W', 'W', 'W')],
+    ('W', 'E', 'E', 'E'): [('E', 'E', 'E', 'E')],
+    ('E', 'W', 'W', 'W'): [('W', 'W', 'W', 'W')]
 
-               ('B', 'Dirty', 'Dirty'): [('A', 'Dirty', 'Dirty'), ('B', 'Dirty', 'Clean'), ('B', 'Dirty', 'Dirty')],
-               ('B', 'Clean', 'Dirty'): [('A', 'Clean', 'Dirty'), ('B', 'Clean', 'Clean'), ('B', 'Clean', 'Dirty')],
-               ('B', 'Clean', 'Clean'): [('A', 'Clean', 'Clean'), ('B', 'Clean', 'Clean'), ('B', 'Clean', 'Clean')],
-               ('B', 'Dirty', 'Clean'): [('A', 'Dirty', 'Clean'), ('B', 'Dirty', 'Clean'), ('B', 'Dirty', 'Clean')],
-               }
+}
 
 '''
 Run tree search and display the nodes in the path to goal node
