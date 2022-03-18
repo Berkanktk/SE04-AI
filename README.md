@@ -7,4 +7,5 @@ H = Homework
 |-----|--------------|-------------------|-------------|
 | 01  | Torsdag 24/2 | Agents            | E & H       |
 | 02  | Torsdag 3/3  | Uninformed Search | E & H       |
-| 03  | Torsdag 10/3 | Informed Search   | E & H*      |
+| 03  | Torsdag 10/3 | Informed Search   | E & H       |
+| 04  | Torsdag 17/3 | Local Search      | E & H       |
