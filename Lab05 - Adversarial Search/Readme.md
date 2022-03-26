@@ -50,3 +50,32 @@ X O X
 Its pretty much impossible to win the game since the AI is starting. So the best result is a draw.
 
 # Homework notes
+Initial output:
+```python
+******************************* 
+| Welcome to the game of Nim! | 
+*******************************
+
+****************************
+Current piles: [15]
+****************************
+Which pile (from 1 to 1, must be > 2)?
+```
+
+After first split
+```python
+****************************
+Current piles: [15]
+****************************
+Which pile (from 1 to 1, must be > 2)?
+1
+Selected pile 15
+How much is the first split (from 1 to 14)?
+5
+New piles: [5, 10]
+
+****************************
+Current piles: [4, 1, 10]
+****************************
+Which pile (from 1 to 3, must be > 2)?
+```
