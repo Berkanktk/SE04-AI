@@ -10,4 +10,4 @@ H = Homework
 | 03  | Torsdag 10/3 | Informed Search    | E & H       |
 | 04  | Torsdag 17/3 | Local Search       | E & H       |
 | 05  | Torsdag 24/3 | Adversarial Search | E & H       |
-| 06  | Torsdag 30/3 | CSP |        |
+| 06  | Torsdag 31/3 | CSP |        |
