@@ -11,3 +11,5 @@ H = Homework
 | 04  | Torsdag 17/3 | Local Search                     | E & H       |
 | 05  | Torsdag 24/3 | Adversarial Search               | E & H       |
 | 06  | Torsdag 7/4  | Constraint Satisfaction Problems | E & H       |
+| 07  | Torsdag 28/4 | Bayesian Networks                | E & H       |
+| 08  | Torsdag 6/5  | Hidden Markov Models             |             |
