@@ -19,17 +19,18 @@ def main():
 
     # To simulate starting from index 1, we add a dummy value at index 0
     observationss = [
-        [None, 3, 1, 3],
-        [None, 3, 3, 1, 1, 2, 2, 3, 1, 3],
-        [None, 3, 3, 1, 1, 2, 3, 3, 1, 2],
+        [None, 2, 1, 3, 1],
+        # [None, 3, 3, 1, 1, 2, 2, 3, 1, 3],
+        # [None, 3, 3, 1, 1, 2, 3, 3, 1, 2],
     ]
     verbose = True
 
     # Markov transition matrix
     # transitions[start, end]
-    transitions = np.array([[.0, .8, .2, .0],  # Initial state
-                            [.0, .6, .3, .1],  # Hot state
-                            [.0, .4, .5, .1],  # Cold state
+    # Pointers and arrows
+    transitions = np.array([[.0, .6, .4, .0],  # Initial state
+                            [.0, .3, .5, .2],  # Hot state
+                            [.0, .2, .6, .2],  # Cold state
                             [.0, .0, .0, .0],  # Final state
                             ])
 
@@ -38,9 +39,10 @@ def main():
     # Note: in the problem the possible emissions are 1, 2, 3
     # In the code, since arrays start from 0, they are 0, 1, 2, 3, but the
     # probability for 0 is always 0
+    # From tables
     emissions = np.array([[.0, .0, .0, .0],  # Initial state
-                          [.0, .2, .4, .4],  # Hot state
-                          [.0, .5, .4, .1],  # Cold state
+                          [.0, .2, .5, .3],  # Hot state
+                          [.0, .4, .3, .3],  # Cold state
                           [.0, .0, .0, .0],  # Final state
                           ])
 
@@ -210,27 +212,27 @@ def test_parameters(states, transitions, emissions):
         print("Emission of ", b, " from ", states[a], ": ", emissions[a, b])
 
     f = len(states) - 1
-    print_transition(0, 1)
-    print_transition(0, 2)
-    print_transition(1, 2)
-    print_transition(1, 1)
-    print_transition(2, 1)
-    print_transition(2, 2)
-    print_transition(1, f)
-    print_transition(2, f)
-
-    print_emission(0, 1)
-    print_emission(0, 2)
-    print_emission(0, 3)
-    print_emission(f, 1)
-    print_emission(f, 2)
-    print_emission(f, 3)
-    print_emission(1, 1)
-    print_emission(1, 2)
-    print_emission(1, 3)
-    print_emission(2, 1)
-    print_emission(2, 2)
-    print_emission(2, 3)
+    # print_transition(0, 1)
+    # print_transition(0, 2)
+    # print_transition(1, 2)
+    # print_transition(1, 1)
+    # print_transition(2, 1)
+    # print_transition(2, 2)
+    # print_transition(1, f)
+    # print_transition(2, f)
+    #
+    # print_emission(0, 1)
+    # print_emission(0, 2)
+    # print_emission(0, 3)
+    # print_emission(f, 1)
+    # print_emission(f, 2)
+    # print_emission(f, 3)
+    # print_emission(1, 1)
+    # print_emission(1, 2)
+    # print_emission(1, 3)
+    # print_emission(2, 1)
+    # print_emission(2, 2)
+    # print_emission(2, 3)
 
 
 if __name__ == '__main__':
