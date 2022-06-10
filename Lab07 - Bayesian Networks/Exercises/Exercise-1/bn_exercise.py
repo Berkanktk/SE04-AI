@@ -119,19 +119,24 @@ class Variable(object):
         if self.ready:
             return
 
-        # COMPLETE THIS FUNCTION
+        if len(self.parents) == 0:
+            self.marginal_probabilities = self.probability_table[list(self.probability_table.keys())[0]]
+        else:
+            # for each row in probability table
+            for key, v in self.probability_table.items():
+                # marginal probability of parents, assume parents are
+                # independent
+                parents_probability_array = [
+                    parent.get_marginal_probability(k)
+                    for parent, k in zip(self.parents, key)
+                ]
 
-        marginal_probability = {1: 1, 0: 1}
+                parents_probability = multiply_vector_elements(parents_probability_array)
 
-        for keypair in self.probability_table:
-            # print("keypair: ", keypair)
-            for key in keypair:
-                # print("key: ", key, " assignment:", self.assignments[key])
-                for probability in self.probability_table[keypair]:
-                    # print("probability: ", probability)
-                    marginal_probability[self.assignments[key]] += probability
-        # Set self.marginal_probabilities
-        self.marginal_probabilities = marginal_probability
+                self.marginal_probabilities = [
+                    self.marginal_probabilities[j] + v[j]*parents_probability
+                    for j in range(len(self.assignments))
+                ]
 
         # set this Node`s state to ready
         self.ready = True
@@ -220,16 +225,13 @@ class BayesianNetwork(object):
     # values is dictionary
     def get_joint_probability(self, values):
         """ return the joint probability of the Nodes """
-        print(values)
 
-        for node_name in values:
-            node = self.varsMap[node_name]
-            print("assignment: ", node.assignments[values[node_name]])
-            print("marginal: ", node.get_marginal_probability(values[node_name]))
-        pass
-        # COMPLETE THIS FUNCTION
-
-        # Return join probability
+        joint = 1
+        for var in reversed(self.variables):
+            var_value = values[var.name]
+            parents_values = self.sub_vals(var, values)
+            joint = joint * var.get_probability(var_value, parents_values)
+        return joint
 
     def get_conditional_probability(self, values, evidents):
         """ returns the conditional probability.
@@ -275,16 +277,13 @@ class BayesianNetwork(object):
                 k = list(values.keys())[0]
                 complementary_conditional_values = values.copy()
                 complementary_conditional_values[k] = 'false' if values[k] == 'true' else 'true'
-                marginal_of_evidents = marginal_of_evidents * self.varsMap[child].get_conditional_probability(c_val,
-                                                                                                              complementary_conditional_values)
+                marginal_of_evidents = marginal_of_evidents * self.varsMap[child].get_conditional_probability(c_val, complementary_conditional_values)
 
                 # print("Child: {}".format(child))
                 # print("    Given: {}".format(complementary_conditional_values))
 
             # uses Bayes rule, for calculating the conditional probability
-            res = (joint_conditional_children * joint_marginal_parents) / \
-                  ((joint_conditional_children * joint_marginal_parents) + marginal_of_evidents *
-                   (1 - joint_marginal_parents))
+            res = (joint_conditional_children * joint_marginal_parents) / ((joint_conditional_children * joint_marginal_parents) + marginal_of_evidents * (1 - joint_marginal_parents))
 
         return res
 
@@ -378,7 +377,7 @@ def sprinkler():
     # creation of Network
     network = BayesianNetwork()
     network.set_variables(variables)
-
+    
     # pre-calculate marginals
     network.calculate_marginal_probabilities()
 
@@ -387,10 +386,10 @@ def sprinkler():
     print('')
 
     joint_values = {
-        'Sprinkler': 'true',
-        'Cloudy': 'true',
-        'WetGrass': 'true',
-        'Rain': 'false'
+        'Sprinkler': 'false',
+        'Cloudy': 'false',
+        'WetGrass': 'false',
+        'Rain': 'true'
     }
     print_joint_probability(network, joint_values)
 
