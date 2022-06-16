@@ -4,6 +4,7 @@ import numpy as np
 def main():
     np.set_printoptions(suppress=True)
 
+    # Change states
     states = np.array(["initial", "hot", "cold", "final"])
 
     # To simulate starting from index 1, we add a dummy value at index 0
